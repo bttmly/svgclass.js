@@ -1,4 +1,3 @@
-svgclass.js
-===========
+# svgclass.js
 
-jQuery plugin to add a method for manipulating the classes of SVG elements.
+A jQuery plugin for easily adding, removing, toggling, and setting classes on SVG elements and SVG descendants.
