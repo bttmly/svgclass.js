@@ -1,0 +1,222 @@
+html, body, div, article, section, header, footer, main, 
+h1, h2, h3, h4, h5, h6, p, span, code, pre, table, th, tr, td, input {
+    margin: 0;
+	padding: 0;
+	border: 0;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 { line-height: 1; }
+
+ol, ul { 
+    /*list-style: none; */
+    /*padding-left: 0;*/
+}
+
+ol > li:not(:last-of-type), ul > li:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+*, *:after, *:before { box-sizing: border-box; }
+
+body {
+    margin-top: 2rem;
+    font-family: sans-serif; 
+    -webkit-font-smoothing: antialiased
+}
+
+.column {
+    max-width: 100%;
+    width: 40em;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: normal;
+    line-height: 1;
+    font-family: cousine, monospace;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #666;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 100%;
+    line-height: 1.5em;
+    margin-bottom: 1rem;
+}
+
+code, pre { font-family: cousine, monospace; }
+
+pre {    
+    background: #f5f5f5;
+    border: 1px dotted #aaa;
+    border-radius: 3px;
+    padding: .5rem;
+    margin: 1rem 0;
+    white-space: pre-wrap;
+}
+
+#controls {
+    font-size: 0;
+}
+
+#controls > :not(:last-child) {
+    margin-right: 1%;
+}
+
+#controls > * {
+    font-size: 1rem;
+}
+
+input, button {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+#class-input {
+    line-height: 1;
+    padding: .25rem;
+    border: 1px solid #666;
+    border-radius: 3px;
+    font-family: cousine, monospace;
+    font-weight: bold;
+    width: 30%;
+    position: relative;
+}
+
+#class-input:focus, button:focus {
+    box-shadow: 0 0 5px #666;
+    outline: none;
+}
+
+button {
+    font-size: 1rem;
+    background: white;
+    border: 1px solid #666;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: .25rem 0;
+    text-align: center;
+    font-family: cousine, monospace;
+    width: 13%;
+    position: relative;
+}
+
+button:hover {
+    background: #f4f4f4;
+}
+
+button:active {
+    background: #eee;
+}
+
+button:after, #class-input:after {
+    opacity: 0;
+    background: rgba(0,0,0,.65);
+    color: white;
+    position: absolute;
+    content: attr(title);
+    padding: .5em;
+    border-radius: 3px;
+    top: -2rem;
+    right: 0;
+    transition: .2s ease-in-out opacity, .2s ease-in-out top;
+    font-size: .75em;
+    line-height: 1;
+    width: auto;
+    white-space: pre;
+}
+
+button:before, #class-input:before {
+    content: '';
+    opacity: 0;
+    width: 0; 
+	height: 0; 
+	border-left: .5rem solid transparent;
+	border-right: .5rem solid transparent;
+	border-top: .75rem solid rgba(0,0,0,.67);
+    top: -.5rem;
+    right: 50%;
+    transition: .2s ease-in-out opacity, .2s ease-in-out top;
+    font-size: .75em;
+    position: absolute;
+}
+
+button:hover:after, #class-input:hover:after {
+    opacity: 1;
+    top: -2.5rem;
+}
+
+button:hover:before, #class-input:hover:after {
+    opacity: 1;
+    top: -1rem;
+}
+
+svg {
+    width: 100%;
+}
+
+svg rect, svg circle {
+    transition: all .25s ease;
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.svg-holder {
+    border: 1px solid gray;
+    box-shadow: 0 0 2px gray;
+    overflow: hidden;
+    width: 100%;
+    max-height: 20em;
+    margin: 1rem 0;
+}
+
+.blue {
+    fill: blue;
+}
+
+.green {
+    fill: green;
+}
+
+.red {
+    fill: red;
+}
+
+.big {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
+.small {
+    -webkit-transform: scale(.5);
+    -moz-transform: scale(.5);
+    transform: scale(.5);
+}
+
+.transparent {
+    opacity: 0.05;
+}
+
+.semi-transparent {
+    opacity: .5;
+}
+
+.opaque {
+    opacity: 1;
+}
+
+@media screen and (max-width: 40em) {
+    input {
+        display: block;
+        width: 100%;
+    }
+    
+    button {
+        width: 19%;
+    }
+}  

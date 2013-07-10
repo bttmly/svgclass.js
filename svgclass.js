@@ -1,48 +1,92 @@
 (function( $ ) {
  
-    $.fn.svgAddClass = function(c) {
+    $.fn.svgAddClass = function(value) {
+        var classes = eliminateDuplicates(value.split(' '));
         return this.each(function() {
-            var currentClasses = this.attr('class').split(' ');
-            var add = c.split(' ');
-            for ( var i = 0; i < add.length; i++ ) {
-                if ( currentClasses.indexOf(add[i]) == -1 ) {
-                    currentClasses.push(add[i]);
+            if ( $(this).is("[class]") ) { 
+                var currentClasses = $(this).attr('class').split(' ');
+            } else {
+                var currentClasses = [];
+            }
+            for ( var i = 0; i < classes.length; i++ ) {
+                if ( currentClasses.indexOf(classes[i]) == -1 ) {
+                    currentClasses.push(classes[i]);
                 }
             }
-            this.attr('class', currentClasses.join[' ']);
+            $(this).attr('class', currentClasses.join(' '));
         });
     };
  
-    $.fn.svgRemoveClass = function(c) {
+    $.fn.svgRemoveClass = function(value) {
+        var classes = eliminateDuplicates(value.split(' '));
         return this.each(function() {
-            var currentClasses = this.attr('class').split(' ');
-            var remove = c.split(' ');
-            for ( var i = 0; i < remove.length; i++ ) {
-                if ( currentClasses.indexOf(remove[i]) != -1 ) {
-                    currentClasses.splice(currentClasses.indexOf(remove[i]), 1);
+            if ( $(this).is("[class]") ) { 
+                var currentClasses = $(this).attr('class').split(' ');
+            } else {
+                var currentClasses = [];
+            }
+            for ( var i = 0; i < classes.length; i++ ) {
+                if ( currentClasses.indexOf(classes[i]) != -1 ) {
+                    currentClasses.splice(currentClasses.indexOf(classes[i]), 1);
                 }
             }
-            this.attr('class', currentClasses.join[' ']);
+            $(this).attr('class', currentClasses.join(' '));
         });
     };
     
-    $.fn.svgToggleClass = function(c) {
+    $.fn.svgToggleClass = function(value) {
+        var classes = eliminateDuplicates(value.split(' '));
         return this.each(function() {
-            var currentClasses = this.attr('class').split(' ');
-            var toggle = c.split(' ');
-            for ( var i = 0; i < toggle.length; i++ ) {
-                if ( currentClasses.indexOf(toggle[i]) == -1 ) {
-                    currentClasses.push(toggle[i]);
+            if ( $(this).is("[class]") ) { 
+                var currentClasses = $(this).attr('class').split(' ');
+            } else {
+                var currentClasses = [];
+            }
+            for ( var i = 0; i < classes.length; i++ ) {
+                if ( currentClasses.indexOf(classes[i]) == -1 ) {
+                    currentClasses.push(classes[i]);
                 } else {
-                    currentClasses.splice(currentClasses.indexOf(toggle[i]), 1);
+                    currentClasses.splice(currentClasses.indexOf(classes[i]), 1);
                 }
             }
-            this.attr('class', currentClasses.join[' ']);
+            $(this).attr('class', currentClasses.join(' '));
         });
     }
     
-    $.fn.svgSetClass = function(c) {
-        return this.attr('class', c);
+    $.fn.svgHasClass = function(value) {
+        var classes = value.split(' ')
+        var has = false;
+        this.each(function() {
+            if ( $(this).is("[class]") ) {
+                var currentClasses = $(this).attr('class').split(' ');
+                var singleHas = 0;
+                for ( var i = 0; i < classes.length; i++ ) {
+                    if ( currentClasses.indexOf(classes[i]) != -1 ) {
+                        singleHas++;
+                    }
+                }
+                if (currentClasses.length > 0 && singleHas === classes.length ) {
+                    has = true;
+                }
+            }
+        });
+        return has;
+    }
+    
+    // http://dreaminginjavascript.wordpress.com/2008/08/22/eliminating-duplicates/
+    function eliminateDuplicates(arr) {
+        var i,
+            len=arr.length,
+            out=[],
+            obj={};
+        for (i=0;i<len;i++) {
+            obj[arr[i]]=0;
+        }
+        for (i in obj) {
+            out.push(i);
+        }
+        return out;
+        // return arr;
     }
  
 }( jQuery ));

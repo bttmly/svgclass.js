@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>svgclass.js Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="demo.css">
+        <script src="//use.edgefonts.net/cousine.js"></script>
+    </head>
+    <body>
+        <div class='column'>
+            <h1>svgclass.js</h1>
+            <p id='info' class='my info paragraph'>SVG elements don't respond to the jQuery methods to add, remove, toggle, and check classes the way other elements do. You can overwrite the attribute with <code>.attr('class', 'xyz')</code> but this isn't acceptable in many cases. svgclass.js addresses this problem with four methods for SVG elements which mirror the functionality of <code>.addClass()</code>, <code>.removeClass()</code>, <code>.toggleClass()</code>, and <code>.hasClass()</code>.</p>
+            
+            <p>Try adding some of these classes (if you want to add more than one just separate them with a space as usual).</p>
+            <pre>
+.blue { fill: blue; }   <em>/* initial class */</em>
+.green { fill: green;}
+.red { fill: red; }
+.big { transform: scale(1.5); }
+.small { transform: scale(.5); }
+.transparent { opacity: .05; }
+.semi-transparent { opacity: .5; }
+.opaque { opacity: 1; }</pre>
+            <div id="controls">
+                <input type='text' id='class-input' list='classes'></input>
+                <datalist id="classes">
+                   <option value="blue">
+                   <option value="green">
+                   <option value="red">
+                   <option value="big">
+                   <option value="small">
+                   <option value="transparent">
+                   <option value="semi-transparent">
+                   <option value="opaque">
+                </datalist>
+                <button id='add' title='using .svgAddClass();'>Add</button>
+                <button id='remove' title='using .svgRemoveClass();'>Remove</button>
+                <button id='toggle' title='using .svgToggleClass();'>Toggle</button>
+                <button id='has' title='using .svgHasClass();'>Has?</button>
+                <button id='reset' title='resets to original values'>Reset</button>
+            </div>
+            <p><code>.svgHasClass</code> output: <span id='has-class'></span></p>
+            <div class="svg-holder">
+                <svg id='example' version="1.1" id="demo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+                    <rect class='rectangle' fill="#FFFFFF" width="400" height="400"/>
+                    <circle class="blue" cx="75" cy="200" r="75"/>
+                    <circle class="blue" cx="325" cy="200" r="75"/>
+                </svg>
+            </div>
+            <h2>Miscellaneous</h2>
+            <ul>
+                <li>Duplicate classes are skipped and for .svgToggleClass() they are stripped out so you don't toggle the same class on then off (or vice versa).</li>
+                <li>If you remove all color classes from the circle, the usual behavior is to give it black fill.</li>
+                <li>The .svgHasClass() method works the same way as .hasClass(), i.e. it returns true if <em>any one</em> of the matched elements contains <em>all</em> of the classes you pass it.</li>
+                <li>.svgToggleClass() will toggle each of the classes passed to it, so it may turn some classes on and some off.</li>
+            </ul>
+        </div>
+        <script src="jquery.js"></script>
+        <script src='svgclass.js'></script>
+    </body>
+    <script>
+        
+        var input = $('#class-input')
+        
+        $('#add').click(function() {
+            $('circle').svgAddClass(input.val());
+            clearInput();
+        });
+        $('#remove').click(function() {
+            $('circle').svgRemoveClass(input.val());
+            clearInput();
+        });
+        $('#toggle').click(function() {
+            $('circle').svgToggleClass(input.val());
+            clearInput();
+        })
+        $('#reset').click(function() {
+            $("circle").attr("class", "blue");
+            clearInput();
+        })
+        $("#has").click(function() {
+            var tf = $('circle').svgHasClass(input.val());
+            console.log(tf);
+            if ( tf === false ) {
+                $("#has-class").html(tf.toString()).css('color', 'red');
+            } else if ( tf === true ) {
+                $("#has-class").html(tf.toString()).css('color', 'green');
+            }
+            clearInput();
+        })
+        function clearInput() {
+            $('#class-input').val('');
+        }
+    </script>
+</html>
